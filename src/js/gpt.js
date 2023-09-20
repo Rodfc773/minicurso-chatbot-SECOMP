@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function chat(msg){
+export async function chat(msgs){
 
    const res =  await axios.post(
         "https://api.openai.com/v1/chat/completions", 
@@ -10,12 +10,9 @@ export async function chat(msg){
         [
             {
                 role:"system", 
-                content:"Você é mestre yoda de star wars"
+                content:"Você é o mestre yoda de star wars e age e fala como ele"
             },
-            {
-                role: "user",
-                content: msg,
-            }
+            ...msgs,
         ]
     },
     {

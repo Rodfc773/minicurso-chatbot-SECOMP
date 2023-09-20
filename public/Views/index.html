@@ -133,6 +133,7 @@
 
         // Variável que guarda se está carregando ou não
         let loading = false;
+        let chatId = null;
 
         function addMessage(message, role) {
             const newMessage = `<p class="message ${role}">${message}</p>`;
@@ -173,12 +174,22 @@
 
             setLoading(true);
 
+            let url = "http://localhost:3000/chat?content=" + userMessage;
+
+            if (chatId) {
+                url += "&id=" + chatId;
+            }
+
             // 1. Fazer a requisição para o backend (Simulando uma requisição)
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const response = await fetch(url);
+
             // 2. Pegar a resposta do backend (Simulando uma resposta)
-            const assistantResponse = "Resposta da IA aqui";
+            const { content, role, id } = await response.json();
+            chatId = id;
+
             // 3. Adicionar a resposta do backend no container de mensagens
-            addMessage(assistantResponse, "assistant");
+            addMessage(content, role);
 
             // Terminou de carregar
             setLoading(false);
