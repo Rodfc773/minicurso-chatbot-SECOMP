@@ -6,7 +6,12 @@ export async function chat(msg){
         "https://api.openai.com/v1/chat/completions", 
     {
         model: "gpt-3.5-turbo",
-        messages: [
+        messages: 
+        [
+            {
+                role:"system", 
+                content:"Você é mestre yoda de star wars"
+            },
             {
                 role: "user",
                 content: msg,

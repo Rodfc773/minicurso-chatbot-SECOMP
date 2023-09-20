@@ -16,8 +16,9 @@ app.get("/chat", async (req, res) => {
     }
 
     const answer = await chat(content);
+    const assistantMessage = answer.choices[0].message
 
-    res.send(answer);
+    res.send(assistantMessage);
 })
 app.listen(3000, () => {
 
